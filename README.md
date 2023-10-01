@@ -1,5 +1,13 @@
 # localpilot
-_Any way you want it, that's the way you need it_
+_Use Copilot locally on your Macbook with one-click!_
+
+<img width="1072" alt="image" src="https://github.com/danielgross/localpilot/assets/279531/4a59030b-7858-4233-b370-edf31aa545a8">
+
+
+https://github.com/danielgross/localpilot/assets/279531/92a9e7e8-d27b-4290-97eb-2a4669691cdf
+
+
+_This video is not sped up or slowed down._
 
 ## Installation 
 1. First, open VS Code and add the following to your settings.json file: 
@@ -30,15 +38,19 @@ Enjoy your on-device Copilot!
 ## Caveat FAQ
 
 **Is the code as good as GitHub Copilot?** 
-For simple line completions yes. For simple function completions, yes. For complex functions... maybe. 
+
+For simple line completions yes. For simple function completions, mostly. For complex functions... maybe. 
 
 **Is it as fast as GitHub Copilot?**
+
 On my Macbook Pro with an Apple M2 Max, the 7b models are roughly as fast. The 34b models are not. Please consider this repo a demonstration of a very inefficient implementation. I'm sure we can make it faster; please do submit a pull request if you'd like to help. For example, I think we need debouncer because sometimes llama.cpp/GGML isn't fast at interrupting itself when a newer request comes in.
 
 **Can this be packaged as a simple Mac app?**
+
 Yes!, I'm sure it can be, I just haven't had the time. 
 
 **Is it good?** 
+
 Only if your network is bad. I don't think it's competitive if you have fast Internet. But it sure is awesome on airplanes and while tethering!
 
 
