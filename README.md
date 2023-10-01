@@ -1,9 +1,9 @@
 # localpilot
-_Use Copilot locally on your Macbook with one-click!_
+_Use GitHub Copilot locally on your Macbook with one-click!_
 
 <img width="1072" alt="image" src="https://github.com/danielgross/localpilot/assets/279531/4a59030b-7858-4233-b370-edf31aa545a8">
 
-
+## Demo Video
 https://github.com/danielgross/localpilot/assets/279531/92a9e7e8-d27b-4290-97eb-2a4669691cdf
 
 
