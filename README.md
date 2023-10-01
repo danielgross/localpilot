@@ -29,12 +29,16 @@ Enjoy your on-device Copilot!
 
 ## Caveat FAQ
 
-**Is the code as good as GitHub Copilot?** For simple line completions yes. For simple function completions, yes. For complex functions... maybe. 
+**Is the code as good as GitHub Copilot?** 
+For simple line completions yes. For simple function completions, yes. For complex functions... maybe. 
 
-**Is it as fast as GitHub Copilot?** On my Macbook Pro with an Apple M2 Max, the 7b models are roughly as fast. The 34b models are not. Please consider this repo a demonstration of a very inefficient implementation. I'm sure we can make it faster; please do submit a pull request if you'd like to help. For example, I think we need debouncer because sometimes llama.cpp/GGML isn't fast at interrupting itself when a newer request comes in.
+**Is it as fast as GitHub Copilot?**
+On my Macbook Pro with an Apple M2 Max, the 7b models are roughly as fast. The 34b models are not. Please consider this repo a demonstration of a very inefficient implementation. I'm sure we can make it faster; please do submit a pull request if you'd like to help. For example, I think we need debouncer because sometimes llama.cpp/GGML isn't fast at interrupting itself when a newer request comes in.
 
-**Can this be packaged as a simple Mac app?** Yes!, I'm sure it can be, I just haven't had the time. 
+**Can this be packaged as a simple Mac app?**
+Yes!, I'm sure it can be, I just haven't had the time. 
 
-**Is it good?** Only if your network is bad. I don't think it's competitive if you have fast Internet.
+**Is it good?** 
+Only if your network is bad. I don't think it's competitive if you have fast Internet.
 
 
