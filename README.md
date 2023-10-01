@@ -47,7 +47,7 @@ On my Macbook Pro with an Apple M2 Max, the 7b models are roughly as fast. The 3
 
 **Can this be packaged as a simple Mac app?**
 
-Yes!, I'm sure it can be, I just haven't had the time. 
+Yes!, I'm sure it can be, I just haven't had the time. Please do submit a pull request if you're into that sort of thing!
 
 **Is it good?** 
 
