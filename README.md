@@ -39,6 +39,6 @@ On my Macbook Pro with an Apple M2 Max, the 7b models are roughly as fast. The 3
 Yes!, I'm sure it can be, I just haven't had the time. 
 
 **Is it good?** 
-Only if your network is bad. I don't think it's competitive if you have fast Internet.
+Only if your network is bad. I don't think it's competitive if you have fast Internet. But it sure is awesome on airplanes and while tethering!
 
 
