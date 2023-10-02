@@ -48,6 +48,10 @@ On my Macbook Pro with an Apple M2 Max, the 7b models are roughly as fast. The 3
 
 Yes!, I'm sure it can be, I just haven't had the time. Please do submit a pull request if you're into that sort of thing!
 
+**Should there be a meta-model that routes to a 1b for autocomplete, 7b for more complex autocomplete, and a 34b for program completion?**
+
+Hmm, that seems like an interesting idea.
+
 **Is it good?** 
 
 Only if your network is bad. I don't think it's competitive if you have fast Internet. But it sure is awesome on airplanes and while tethering!
