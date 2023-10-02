@@ -1,4 +1,4 @@
-# localpilot
+# LocalPilot
 _Use GitHub Copilot locally on your Macbook with one-click!_
 
 <img width="1072" alt="image" src="https://github.com/danielgross/localpilot/assets/279531/4a59030b-7858-4233-b370-edf31aa545a8">
