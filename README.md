@@ -4,7 +4,10 @@ _Use GitHub Copilot locally on your Macbook with one-click!_
 ![image](https://github.com/danielgross/localpilot/assets/279531/521d0613-7423-4839-a5e8-42098cd65a5e)
 
 ## Demo Video
-https://github.com/danielgross/localpilot/assets/279531/92a9e7e8-d27b-4290-97eb-2a4669691cdf
+
+
+https://github.com/danielgross/localpilot/assets/279531/3259981b-39f7-4bfa-8a45-84bde6d4ba4c
+
 
 
 _This video is not sped up or slowed down._
