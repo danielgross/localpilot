@@ -55,7 +55,7 @@ Yes!, I'm sure it can be, I just haven't had the time. Please do submit a pull r
 
 Hmm, that seems like an interesting idea.
 
-**Is it good?** 
+**OK, but in summary, is it good?** 
 
 Only if your network is bad. I don't think it's competitive if you have fast Internet. But it sure is awesome on airplanes and while tethering!
 
