@@ -20,7 +20,7 @@ models = {
         'type': 'local',
         'filename': 'codellama-34b-instruct.Q4_K_M.gguf',
     },
-    'default': 'GitHub Cloud',
+    'default': 'GitHub',
 }
 
 model_folder = os.path.expanduser('~/models')
