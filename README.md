@@ -10,13 +10,12 @@ https://github.com/danielgross/localpilot/assets/279531/92a9e7e8-d27b-4290-97eb-
 _This video is not sped up or slowed down._
 
 ## Installation 
-1. First, open VS Code and add the following to your settings.json file: 
+1. First, open VS Code Settings and add the following to your settings.json file: 
 ```json
-    "github.copilot.advanced": {
-        "debug.testOverrideProxyUrl": "http://localhost:5001",
-        "debug.overrideProxyUrl": "http://localhost:5001"
-
-    }
+"github.copilot.advanced": {
+    "debug.testOverrideProxyUrl": "http://localhost:5001",
+    "debug.overrideProxyUrl": "http://localhost:5001"
+}
 ```
 
 2. Create a virtualenv to run this Python process, install the requirements, and download the models. 
