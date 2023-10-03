@@ -5,11 +5,11 @@ import subprocess
 import logging
 from starlette import applications, responses, exceptions
 from starlette.requests import Request
+import config
 
 app = applications.Starlette()
 state = config.models[config.models['default']]
 local_server_process = None
-model_directory = os.path.expanduser("~/models")
 logging.basicConfig(level=logging.DEBUG)
 
 
@@ -37,7 +37,7 @@ async def set_target(request: Request):
     state = config.models[target]
     if config.models[target].get("type") == "local":
         start_local_server(os.path.join(
-            model_directory, config.models[target]['filename']))
+            config.model_folder, config.models[target]['filename']))
 
     message = f'Target set to {state}'
     return responses.JSONResponse({'message': message}, status_code=200)
