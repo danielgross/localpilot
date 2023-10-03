@@ -23,7 +23,7 @@ _This video is not sped up or slowed down._
 
 2. Create a virtualenv to run this Python process, install the requirements, and download the models. 
 ```python
-virtualvenv venv
+virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt
 # First setup run. This will download several models to your ~/models folder.
