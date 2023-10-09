@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 import config
 import httpx
 import os
@@ -9,6 +10,7 @@ import config
 
 app = applications.Starlette()
 state = config.models[config.models['default']]
+local_server_port = 8000
 local_server_process = None
 logging.basicConfig(level=logging.DEBUG)
 
@@ -19,7 +21,8 @@ def start_local_server(model_filename):
         local_server_process.terminate()
         local_server_process.wait()
     cmd = ["python3", "-m", "llama_cpp.server", "--model", model_filename,
-           "--n_gpu_layers", "1", "--n_ctx", "4096"]  # TODO: set this more correctly
+           "--n_gpu_layers", "1", "--n_ctx", "4096",  # TODO: set this more correctly
+           "--port", str(local_server_port)]
     logging.debug('Running: %s' % ' '.join(cmd))
     local_server_process = subprocess.Popen(
         cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -52,7 +55,7 @@ async def proxy(request: Request):
     if state['type'] == 'remote':
         url = f"{state['domain']}{path}"
     elif state['type'] == 'local':
-        url = f"http://localhost:8000{path}"
+        url = f"http://localhost:{local_server_port}{path}"
 
     data = await request.body()
     headers = dict(request.headers)
@@ -86,4 +89,11 @@ async def server_error(request, exc):
 
 if __name__ == '__main__':
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=5001)
+
+    parser = ArgumentParser()
+    parser.add_argument('--port', type=int, default=5001)
+    parser.add_argument('--local-server-port', type=int, default=8000)
+    args = parser.parse_args()
+
+    local_server_port = args.local_server_port
+    uvicorn.run(app, host="0.0.0.0", port=args.port)
