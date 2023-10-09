@@ -1,9 +1,9 @@
+from argparse import ArgumentParser
 import rumps
 import requests
 import threading
 import subprocess
 import os
-import sys
 
 import config
 
@@ -28,8 +28,11 @@ def setup():
 
 
 class ModelPickerApp(rumps.App):
-    def __init__(self):
+    def __init__(self, proxy_port=5001, local_server_port=8000):
         super(ModelPickerApp, self).__init__("ModelPickerApp")
+
+        self.proxy_port = proxy_port
+        self.local_server_port = local_server_port
 
         # Dynamically create menu items from the MENUBAR_OPTIONS
         self.menu_items = {}
@@ -52,7 +55,8 @@ class ModelPickerApp(rumps.App):
             choice = sender.title
             try:
                 response = requests.post(
-                    "http://localhost:5001/set_target", json={"target": choice})
+                    f"http://localhost:{self.proxy_port}/set_target",
+                    json={"target": choice})
                 if response.status_code == 200:
                     print(f"Successfully sent selection: {choice}.")
                 else:
@@ -69,13 +73,25 @@ class ModelPickerApp(rumps.App):
                 self.menu_items[item].state = False
 
     def run_server(self):
-        subprocess.run(['python', 'proxy.py'])
+        subprocess.run([
+            'python', 'proxy.py', '--port', str(self.proxy_port),
+            '--local-server-port', str(self.local_server_port),
+        ])
 
 
 if __name__ == '__main__':
-    if '--setup' in sys.argv:
+    parser = ArgumentParser()
+    parser.add_argument('--proxy-port', type=int, default=5001)
+    parser.add_argument('--local-server-port', type=int, default=8000)
+    parser.add_argument('--setup', action='store_true')
+    args = parser.parse_args()
+
+    if args.setup:
         setup()
-    app = ModelPickerApp()
+    app = ModelPickerApp(
+        proxy_port=args.proxy_port,
+        local_server_port=args.local_server_port,
+    )
     print("Running server...")
     server_thread = threading.Thread(target=app.run_server)
     server_thread.start()
