@@ -86,4 +86,7 @@ async def server_error(request, exc):
 
 if __name__ == '__main__':
     import uvicorn
+    if state.get("type") == "local":
+        start_local_server(os.path.join(
+            config.model_folder, state['filename']))
     uvicorn.run(app, host="0.0.0.0", port=5001)
