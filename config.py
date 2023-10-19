@@ -10,6 +10,11 @@ models = {
         'type': 'local',
         'filename': 'codellama-7b.Q5_K_S.gguf',
     },
+    'CodeLlama-7b-4_0_metal': {
+        'url': 'https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q4_0.gguf',
+        'type': 'local',
+        'filename': 'codellama-7b.Q4_0.gguf',
+    },
     'Mistral-7b': {
         'url': 'https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q5_K_M.gguf',
         'type': 'local',
