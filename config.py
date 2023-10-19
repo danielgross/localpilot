@@ -10,15 +10,30 @@ models = {
         'type': 'local',
         'filename': 'codellama-7b.Q5_K_S.gguf',
     },
+    'CodeLlama-7b-4_0_metal': {
+        'url': 'https://huggingface.co/TheBloke/CodeLlama-7B-GGUF/resolve/main/codellama-7b.Q4_0.gguf',
+        'type': 'local',
+        'filename': 'codellama-7b.Q4_0.gguf',
+    },
     'Mistral-7b': {
         'url': 'https://huggingface.co/TheBloke/Mistral-7B-Instruct-v0.1-GGUF/resolve/main/mistral-7b-instruct-v0.1.Q5_K_M.gguf',
         'type': 'local',
         'filename': 'mistral-7b-instruct-v0.1.Q5_K_M.gguf',
     },
-    'CodeLlama-34b': {
-        'url': 'https://huggingface.co/TheBloke/CodeLlama-34B-Instruct-GGUF/resolve/main/codellama-34b-instruct.Q4_K_M.gguf',
+    # 'CodeLlama-34b': {
+    #     'url': 'https://huggingface.co/TheBloke/CodeLlama-34B-Instruct-GGUF/resolve/main/codellama-34b-instruct.Q4_K_M.gguf',
+    #     'type': 'local',
+    #     'filename': 'codellama-34b-instruct.Q4_K_M.gguf',
+    # },
+    'CodeLlama-Instruct-13B': {
+        'url': 'https://huggingface.co/TheBloke/CodeLlama-13B-Instruct-GGUF/resolve/main/codellama-13b-instruct.Q5_K_M.gguf',
         'type': 'local',
-        'filename': 'codellama-34b-instruct.Q4_K_M.gguf',
+        'filename': 'codellama-13b-instruct.Q5_K_M.gguf',
+    },
+    'CodeLlama-Python-13B': {
+        'url': 'https://huggingface.co/TheBloke/CodeLlama-13B-Python-GGUF/resolve/main/codellama-13b-python.Q5_K_M.gguf',
+        'type': 'local',
+        'filename': 'codellama-13b-python.Q5_K_M.gguf',
     },
     'default': 'GitHub',
 }
