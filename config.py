@@ -21,12 +21,12 @@ models = {
     #     'filename': 'codellama-34b-instruct.Q4_K_M.gguf',
     # },
     'CodeLlama-Instruct-13B': {
-        'url': 'https://huggingface.co/TheBloke/CodeLlama-13B-Instruct-GGUF/raw/main/codellama-13b-instruct.Q5_K_M.gguf',
+        'url': 'https://huggingface.co/TheBloke/CodeLlama-13B-Instruct-GGUF/resolve/main/codellama-13b-instruct.Q5_K_M.gguf',
         'type': 'local',
         'filename': 'codellama-13b-instruct.Q5_K_M.gguf',
     },
     'CodeLlama-Python-13B': {
-        'url': 'https://huggingface.co/TheBloke/CodeLlama-13B-Python-GGUF/raw/main/codellama-13b-python.Q5_K_M.gguf',
+        'url': 'https://huggingface.co/TheBloke/CodeLlama-13B-Python-GGUF/resolve/main/codellama-13b-python.Q5_K_M.gguf',
         'type': 'local',
         'filename': 'codellama-13b-python.Q5_K_M.gguf',
     },
