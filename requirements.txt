@@ -9,7 +9,7 @@ h11==0.14.0
 httpcore==0.18.0
 httpx==0.25.0
 idna==3.4
-llama_cpp_python==0.2.11
+llama_cpp_python==0.2.29
 numpy==1.26.0
 pydantic==2.4.2
 pydantic-settings==2.0.3
