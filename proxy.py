@@ -8,7 +8,7 @@ from starlette.requests import Request
 import config
 
 app = applications.Starlette()
-state = config.models[config.models['default']]
+state = config.models[config.settings['default_online']]
 local_server_process = None
 logging.basicConfig(level=logging.DEBUG)
 
@@ -86,4 +86,16 @@ async def server_error(request, exc):
 
 if __name__ == '__main__':
     import uvicorn
+    import psutil
+
+    # kill any existing local server on 5001
+    for proc in psutil.process_iter():
+        try:
+            for conns in proc.connections(kind='inet'):
+                if conns.laddr.port == 5001:
+                    print(f"Killing process {proc.name()} on port 5001")
+                    proc.kill()
+        except:
+            pass
+
     uvicorn.run(app, host="0.0.0.0", port=5001)

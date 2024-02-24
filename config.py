@@ -19,8 +19,16 @@ models = {
         'url': 'https://huggingface.co/TheBloke/CodeLlama-34B-Instruct-GGUF/resolve/main/codellama-34b-instruct.Q4_K_M.gguf',
         'type': 'local',
         'filename': 'codellama-34b-instruct.Q4_K_M.gguf',
-    },
-    'default': 'GitHub',
+    }
+}
+
+settings = {
+    'default_online': 'GitHub',
+    'default_offline': 'CodeLlama-7b',
+    # automatic -> switch to default_online if online, switch to default_offline if offline
+    # trigger_offline -> switch to default_offline if offline, don't switch if online
+    # manual -> don't switch
+    'switch': 'automatic',
 }
 
 model_folder = os.path.expanduser('~/models')
