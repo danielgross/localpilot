@@ -1,0 +1,9 @@
+{
+    "Current Model": "GitHub",
+    "Show Uninstalled": false,
+    "Show Status Icons": true,
+    "Show Current Model": true,
+    "Default Online": "GitHub",
+    "Default Offline": "CodeLlama-7b",
+    "Switch": "Automatic"
+}
