@@ -5,10 +5,16 @@ import subprocess
 import logging
 from starlette import applications, responses, exceptions
 from starlette.requests import Request
-import config
+import json
+
+def get_settings(setting):
+    with open('settings.json', 'r') as f:
+        settings = json.load(f)
+
+    return settings[setting]
 
 app = applications.Starlette()
-state = config.models[config.settings['default_online']]
+state = config.models[get_settings("Default Online")]
 local_server_process = None
 logging.basicConfig(level=logging.DEBUG)
 

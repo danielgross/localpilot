@@ -22,13 +22,4 @@ models = {
     }
 }
 
-settings = {
-    'default_online': 'GitHub',
-    'default_offline': 'CodeLlama-7b',
-    # automatic -> switch to default_online if online, switch to default_offline if offline
-    # trigger_offline -> switch to default_offline if offline, don't switch if online
-    # manual -> don't switch
-    'switch': 'automatic',
-}
-
 model_folder = os.path.expanduser('~/models')

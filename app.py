@@ -1,3 +1,4 @@
+import json
 import rumps
 import requests
 import threading
@@ -63,7 +64,21 @@ def is_installing(model):
         return os.path.exists(f"{config.model_folder}/{model}.lock")
     else:
         return False
+    
+def set_settings(setting, value):
+    with open('settings.json', 'r') as f:
+        settings = json.load(f)
 
+    settings[setting] = value
+
+    with open('settings.json', 'w') as f:
+        json.dump(settings, f, indent=4)
+
+def get_settings(setting):
+    with open('settings.json', 'r') as f:
+        settings = json.load(f)
+
+    return settings[setting]
 
 class ModelPickerApp(rumps.App):
     def __init__(self):
@@ -74,15 +89,43 @@ class ModelPickerApp(rumps.App):
         for option in config.models:
             self.menu_items[option] = rumps.MenuItem(
                 title=option, callback=self.pick_model, icon=None)
-
+            
+        self.menu_items['Settings'] = rumps.MenuItem(
+            title='Settings', icon=None)
+        
+        self.add_settings_menu('Switch', ['Automatic', 'Trigger Offline', 'Manual'])
+        self.add_settings_menu('Default Online', filter(lambda x: config.models[x]['type'] == 'remote', config.models))
+        self.add_settings_menu('Default Offline', filter(lambda x: config.models[x]['type'] == 'local', config.models))
+        
         self.menu = list(self.menu_items.values())
-        self.menu_items[config.settings['default_online']].state = True
-        self.title = config.settings['default_online']
+        self.menu_items[get_settings('Default Online')].state = True
+        self.title = get_settings('Default Online')
         self.icon = ICON
         rumps.Timer(self.update_menu, 5).start()
 
+    def add_settings_menu(self, name, options):
+        self.menu_items["Settings"].add(rumps.MenuItem(title=name, icon=None))
+        selected_option = get_settings(name)
+        for option in options:
+            self.menu_items["Settings"][name].add(
+                rumps.MenuItem(title=option, callback=lambda sender: self.set_setting(sender, name), icon=None))
+            if option == selected_option:
+                self.menu_items["Settings"][name][option].state = True
+
+    def set_setting(self, sender, setting):
+        if sender.state:
+            return
+        
+        set_settings(setting, sender.title)
+
+        for item in self.menu['Settings'][setting]:
+            self.menu_items['Settings'][setting][item].state = item == sender.title
+
+
     def update_menu(self, sender):
         for option in self.menu_items:
+            if not option in config.models:
+                continue
             if is_installing(option):
                 self.menu_items[option].icon = ICON_INSTALLING
             elif is_installed(option):
@@ -92,23 +135,26 @@ class ModelPickerApp(rumps.App):
 
         currently_online = config.models[self.title]['type'] == 'remote'
 
-        if currently_online and config.settings['switch'] == 'automatic' or config.settings['switch'] == 'trigger_offline':
+        if currently_online and get_settings('Switch') == 'Automatic' or get_settings('Switch') == 'Trigger Offline':
             try:
                 response = requests.get("http://google.com", timeout=1.0)
                 if response.status_code != 200:
-                    self.pick_model(self.menu_items[config.settings['default_offline']])
+                    self.pick_model(self.menu_items[get_settings('Default Offline')])
             except requests.RequestException as e:
-                self.pick_model(self.menu_items[config.settings['default_offline']])
+                self.pick_model(self.menu_items[get_settings('Default Offline')])
         
-        if not currently_online and config.settings['switch'] == 'automatic':
+        if not currently_online and get_settings('Switch') == 'Automatic':
             try:
                 response = requests.get("http://google.com", timeout=1.0)
                 if response.status_code == 200:
-                    self.pick_model(self.menu_items[config.settings['default_online']])
+                    self.pick_model(self.menu_items[get_settings('Default Online')])
             except requests.RequestException as e:
                 pass
 
     def pick_model(self, sender):
+        if (sender.state):
+            return
+        
         # check if the model is installed
         if is_installing(sender.title):
             rumps.alert("Model Installing", f"{sender.title} is currently installing.")
@@ -121,13 +167,6 @@ class ModelPickerApp(rumps.App):
                 return
             else:
                 return
-
-        if (sender.state):
-            return
-        
-        # Toggle the checked status of the clicked menu item
-        sender.state = True
-        self.title = sender.title
 
         # Send the choice to the local proxy app
         if sender.state:
@@ -142,13 +181,16 @@ class ModelPickerApp(rumps.App):
                         "Error", f"Failed to send selection. Server responded with: {response.status_code}.")
             except requests.RequestException as e:
                 rumps.alert("Error", f"Failed to send selection. Error: {e}.")
+                return
+        
+        # Toggle the checked status of the clicked menu item
+        self.title = sender.title
 
         # If other options were previously selected, deselect them
         for item in self.menu:
             if item == 'Quit':
                 continue
-            if item != sender.title:
-                self.menu_items[item].state = False
+            self.menu_items[item].state = item == sender.title
 
     def run_server(self):
         subprocess.run(['python', 'proxy.py'])
