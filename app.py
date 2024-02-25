@@ -19,8 +19,6 @@ def setup():
         if input(f"Model folder {config.model_folder} does not exist. Create it? (y/n) ").lower() == 'y':
             os.mkdir(config.model_folder)
     for model in config.models:
-        if model == 'default':
-            continue
         if is_installed(model):
             print(f"Model {model} found in {config.model_folder}.")   
         else:
@@ -32,7 +30,11 @@ def is_installed(model):
     if config.models[model]['type'] == 'local':
         return os.path.exists(config.model_folder + "/" + config.models[model]['filename'])
     else:
-        return True
+        try:
+            response = requests.get("http://google.com", timeout=1.0)
+            return response.status_code == 200
+        except requests.RequestException as e:
+            return False
                 
 
 def install_model(model, verbose = False, app = None):
@@ -57,9 +59,10 @@ def lock_model(model):
         f.write("")
         
 def is_installing(model):
-    if config.models[model]['type'] == 'remote':
+    if config.models[model]['type'] == 'local':
+        return os.path.exists(f"{config.model_folder}/{model}.lock")
+    else:
         return False
-    return os.path.exists(f"{config.model_folder}/{model}.lock")
 
 
 class ModelPickerApp(rumps.App):
@@ -111,6 +114,8 @@ class ModelPickerApp(rumps.App):
             rumps.alert("Model Installing", f"{sender.title} is currently installing.")
             return
         elif not is_installed(sender.title):
+            if config.models[sender.title]['type'] == 'remote':
+                return
             if (rumps.alert("Install Model", f"Install {sender.title}?", cancel = True) == 1):
                 install_model(sender.title, app = self)
                 return
