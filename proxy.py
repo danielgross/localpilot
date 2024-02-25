@@ -89,14 +89,17 @@ if __name__ == '__main__':
     import uvicorn
     import psutil
 
-    # kill any existing local server on 5001
+    # kill any existing local server on 5001 or 8000
     for proc in psutil.process_iter():
         try:
             for conns in proc.connections(kind='inet'):
                 if conns.laddr.port == 5001:
                     print(f"Killing process {proc.name()} on port 5001")
                     proc.kill()
+                if conns.laddr.port == 8000:
+                    print(f"Killing process {proc.name()} on port 8000")
+                    proc.kill()
         except:
-            pass
+            continue
 
     uvicorn.run(app, host="0.0.0.0", port=5001)
